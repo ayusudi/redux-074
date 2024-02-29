@@ -1,21 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  count: 5
+  count: 5,
+  provinces: []
 }
 
 const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    incremented: state => {
+    increment: state => {
       state.count += 1
     },
-    decremented: state => {
+    decrement: state => {
       state.count -= 1
+    },                        // isi dari value itu action dan payload
+    incrementByAmount: (state, value) => {
+      state.count += Number(value.payload)
+    },
+    setProvinces: (state, value) => {
+      state.provinces = value.payload
     }
   }
 })
 
-export const { incremented, decremented } = counterSlice.actions
+export const { increment, decrement, incrementByAmount, setProvinces } = counterSlice.actions
 export default counterSlice.reducer
