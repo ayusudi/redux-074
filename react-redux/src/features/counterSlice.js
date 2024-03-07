@@ -1,9 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios' // pengganti fetch
 
 const initialState = {
-  count: 5,
+  count: 0,
   provinces: []
 }
+
+const URL = "https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
+
+export const fetchProvinces = createAsyncThunk('counter/fetchProvinces', async () => {
+  let response = await axios.get(URL)
+  return response.data
+})
 
 const counterSlice = createSlice({
   name: 'counter',
@@ -21,6 +29,12 @@ const counterSlice = createSlice({
     setProvinces: (state, value) => {
       state.provinces = value.payload
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchProvinces.fulfilled, (state, action) => {
+        state.provinces.push(...action.payload)
+      })
   }
 })
 

@@ -8,6 +8,8 @@ export default function LandingPage() {
       <Link to="/class">Contoh Class Component</Link>
       <br></br>
       <Link to="/function">Contoh Function Component</Link>
+      <br></br>
+      <Link to="/list">Contoh Counter List</Link>
     </div>
   )
 }
